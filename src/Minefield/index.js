@@ -11,23 +11,17 @@ const levelName = 'Medium';
 let minefieldGame;
 
 export default function Minefield() {
-    const [level, setLevel] = useState({});
     const [game, setGame] = useState({});
-    const [rows, setRows] = useState([]);
     const [version, setVersion] = useState(0);
 
     useEffect(() => {
         minefieldGame = minefield.createMinefield(levelName);
         setGame(minefieldGame);
-        setLevel(minefieldGame.level);
-        setRows(minefieldGame.rows);
     }, []);
 
     function restart() {
         minefieldGame = minefield.createMinefield(levelName);
         setGame(minefieldGame);
-        setLevel(minefieldGame.level);
-        setRows(minefieldGame.rows);
         setVersion(version + 1);
     }
 
@@ -40,10 +34,11 @@ export default function Minefield() {
     function squareRightClick(evt, square) {
         evt.preventDefault();
         square.toggleFlag();
+        setGame(minefieldGame);
         setVersion(version + 1);
     }
 
-    const { rows: rowsQty, columns, bombs } = level;
+    const { rows: rowsQty, columns, bombs } = game.level || {};
 
     return (
         <section className="campo-minado">
@@ -62,7 +57,7 @@ export default function Minefield() {
                 }
             </div>
             <div className="main">
-                {rows.map(row => (
+                {game.rows && game.rows.map(row => (
                     <div 
                         key={row.rowIndex}
                         className="square-row"

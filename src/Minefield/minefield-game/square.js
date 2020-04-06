@@ -67,7 +67,7 @@ export default class square {
     }
 
     toggleFlag() {
-        this.hasFlag = !this.hasFlag && !this.showingResult;
+        this.hasFlag = !this.hasFlag && !this.showingResult && !this.row.minefield.isFinished;
     }
 
     putBomb() {
