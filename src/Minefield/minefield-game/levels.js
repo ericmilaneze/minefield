@@ -1,4 +1,9 @@
 const levels = {
+    'easy': {
+        rows: 12,
+        columns: 6,
+        bombs: 10
+    },
     'hard': {
         rows: 28,
         columns: 13,

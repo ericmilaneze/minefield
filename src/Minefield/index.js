@@ -7,34 +7,33 @@ import './index.scss';
 import { FiFlag } from "react-icons/fi";
 import { FaBomb } from "react-icons/fa";
 
-const levelName = 'Medium';
-let minefieldGame;
+const levelName = 'Easy';
 
 export default function Minefield() {
     const [game, setGame] = useState({});
     const [version, setVersion] = useState(0);
 
     useEffect(() => {
-        minefieldGame = minefield.createMinefield(levelName);
-        setGame(minefieldGame);
+        const newGame = minefield.createMinefield(levelName);
+        setGame(newGame);
     }, []);
 
     function restart() {
-        minefieldGame = minefield.createMinefield(levelName);
-        setGame(minefieldGame);
+        const newGame = minefield.createMinefield(levelName);
+        setGame(newGame);
         setVersion(version + 1);
     }
 
     function squareClick(square) {
-        minefieldGame.show(square);
-        setGame(minefieldGame);
+        game.show(square);
+        setGame(game);
         setVersion(version + 1);
     }
 
     function squareRightClick(evt, square) {
         evt.preventDefault();
         square.toggleFlag();
-        setGame(minefieldGame);
+        setGame(game);
         setVersion(version + 1);
     }
 
@@ -67,13 +66,13 @@ export default function Minefield() {
                                 key={square.address.squareIndexInMinefield}
                                 className={`
                                     square 
-                                    ${minefieldGame.shouldPaintAsEven(square) ? 'even' : 'odd'}
+                                    ${game.shouldPaintAsEven(square) ? 'even' : 'odd'}
                                     ${square.showingResult ? 'showing' : 'not-showing'}
                                 `}
                                 onClick={() => squareClick(square)}
                                 onContextMenu={evt => squareRightClick(evt, square)}
                             >
-                                {square.showingResult && !square.hasBomb && square.getNumberOfNeighborsWithBombs()}
+                                {square.showingResult && !square.hasBomb && square.getNumberOfNeighborsWithBombs() !== 0 && square.getNumberOfNeighborsWithBombs()}
                                 {square.showingResult && square.hasBomb && <FaBomb />}
                                 {square.hasFlag && <FiFlag />}
                             </div>

@@ -43,14 +43,26 @@ export default class minefield {
     }
 
     show(square) {
-        if (!this.isFinished && !square.hasFlag) {
+        if (!this.isFinished && !square.hasFlag && !square.showingResult) {
             this.hasStarted = true;
             square.show();
 
             if (square.hasBomb) {
                 this.isFinished = true;
             }
+
+            if (square.getNumberOfNeighborsWithBombs() === 0) {
+                this.explodeSquaresAround(square);
+            }
         }
+    }
+
+    explodeSquaresAround(square) {
+        const neighbors = square.getNeighbors();
+
+        neighbors.forEach(neighbor => {
+            this.show(neighbor);
+        });
     }
 
     _distributeBombs() {

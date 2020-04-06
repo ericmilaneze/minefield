@@ -57,7 +57,7 @@ export default class square {
     }
 
     show() {
-        if (!square.hasFlag) {
+        if (!square.hasFlag && !this.showingResult) {
             this.showingResult = true;
         }
     }
