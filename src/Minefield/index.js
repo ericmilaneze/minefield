@@ -4,6 +4,9 @@ import minefield from './minefield-game/minefield';
 
 import './index.scss';
 
+import { FiFlag } from "react-icons/fi";
+import { FaBomb } from "react-icons/fa";
+
 const levelName = 'Medium';
 let minefieldGame;
 
@@ -76,8 +79,8 @@ export default function Minefield() {
                                 onContextMenu={evt => squareRightClick(evt, square)}
                             >
                                 {square.showingResult && !square.hasBomb && square.getNumberOfNeighborsWithBombs()}
-                                {square.showingResult && square.hasBomb && 'B'}
-                                {square.hasFlag && 'F'}
+                                {square.showingResult && square.hasBomb && <FaBomb />}
+                                {square.hasFlag && <FiFlag />}
                             </div>
                         ))}
                     </div>
