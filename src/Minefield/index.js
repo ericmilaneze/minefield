@@ -10,7 +10,7 @@ import './index.scss';
 export default function Minefield() {
     const [game, setGame] = useState({});
     const [version, setVersion] = useState(0);
-    const [levelName, setLevelName] = useState(levels[Object.keys(levels)[0]].name)
+    const [levelName, setLevelName] = useState(levels[Object.keys(levels)[0]].name);
 
     useEffect(() => {
         const newGame = minefield.createMinefield(levelName);
@@ -31,7 +31,7 @@ export default function Minefield() {
 
     function squareRightClick(evt, square) {
         evt.preventDefault();
-        square.toggleFlag();
+        game.toggleFlag(square);
         setGame(game);
         setVersion(version + 1);
     }
@@ -40,15 +40,22 @@ export default function Minefield() {
         setLevelName(levelName);
     }
 
-    const { rows: rowsQty, columns, bombs } = game.level || {};
-
     return (
         <section className="campo-minado">
             <div className="config">
-                <div>Level: {levelName}</div>
-                <div>Rows: {rowsQty}</div>
-                <div>Columns: {columns}</div>
-                <div>Bombs: {bombs}</div>
+                {game.level &&
+                    <div className="row">
+                        <div>Level: {game.level.name}</div>
+                        <div>Rows: {game.level.rows}</div>
+                        <div>Columns: {game.level.columns}</div>
+                        <div>Bombs: {game.level.bombs}</div>
+                    </div>
+                }
+
+                <div className="row">
+                    <div>Flags: {game.qtyFlagsMissing}</div>
+                    <div>Fields: {game.qtyFieldsToExplore}</div>
+                </div>
 
                 {game.hasStarted &&
                     <button 
@@ -66,6 +73,11 @@ export default function Minefield() {
                         <option value={level} key={level}>{levels[level].name}</option>
                     ))}
                 </select>
+
+                <div className="row result">
+                    {game.win && 'You win!'}
+                    {game.lose && 'You lose!'}
+                </div>
             </div>
             <div className="main">
                 {game.rows && game.rows.map(row => (

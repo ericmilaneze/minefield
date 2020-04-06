@@ -3,20 +3,23 @@ import row from './row';
 import square from './square';
 
 export default class minefield {
-    constructor(levelName, level) {
-        this.levelName = levelName;
+    constructor(level) {
         this.level = level;
         this.rows = [];
         this.squares = [];
         this.squaresWithBombs = [];
         this.isFinished = false;
+        this.lose = false;
+        this.win = false;
         this.hasStarted = false;
+        this.qtyFlagsMissing = level.bombs;
+        this.qtyFieldsToExplore = 0;
     }
 
     static createMinefield(levelName) {
         const level = levels[levelName.toLowerCase()];
 
-        const mf = new minefield(levelName, level);
+        const mf = new minefield(level);
 
         for (let i = 0; i < mf.level.rows; i++) {
             const row = mf._createRow(i);
@@ -42,6 +45,14 @@ export default class minefield {
         return isEven;
     }
 
+    explodeSquaresAround(square) {
+        const neighbors = square.getNeighbors();
+
+        neighbors.forEach(neighbor => {
+            this.show(neighbor);
+        });
+    }
+
     show(square) {
         if (!this.isFinished && !square.hasFlag && !square.showingResult) {
             this.hasStarted = true;
@@ -49,6 +60,14 @@ export default class minefield {
 
             if (square.hasBomb) {
                 this.isFinished = true;
+                this.lose = true;
+            } else {
+                this.qtyFieldsToExplore--;
+
+                if (this.qtyFieldsToExplore === 0) {
+                    this.isFinished = true;
+                    this.win = true;
+                }
             }
 
             if (square.getNumberOfNeighborsWithBombs() === 0) {
@@ -57,12 +76,16 @@ export default class minefield {
         }
     }
 
-    explodeSquaresAround(square) {
-        const neighbors = square.getNeighbors();
+    toggleFlag(square) {
+        if (!square.showingResult && !this.isFinished) {
+            square.toggleFlag();
 
-        neighbors.forEach(neighbor => {
-            this.show(neighbor);
-        });
+            if (square.hasFlag) {
+                this.qtyFlagsMissing--;
+            } else {
+                this.qtyFlagsMissing++;
+            }
+        }
     }
 
     _distributeBombs() {
@@ -78,6 +101,7 @@ export default class minefield {
                 this.squaresWithBombs.push(square);
 
                 currNumberOfBombs++;
+                this.qtyFieldsToExplore--;
             }
         }
     }
@@ -96,6 +120,7 @@ export default class minefield {
         row.addSquare(s, this.squares.length);
 
         this.squares.push(s);
+        this.qtyFieldsToExplore++;
 
         return s;
     }
