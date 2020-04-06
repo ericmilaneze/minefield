@@ -1,44 +1,6 @@
 import levels from './levels';
-
-class square {
-    constructor(row) {
-        this.hasBomb = false;
-    }
-
-    setRow(row, squareIndexInMinefield) {
-        this.row = row;
-        this.address = {
-            rowIndex: row.rowIndex,
-            squareIndexInRow: row.squares.length,
-            squareIndexInMinefield
-        };
-    }
-
-    isEven() {
-        return this.address.squareIndexInMinefield % 2 === 0;
-    }
-
-    putBomb() {
-        this.hasBomb = true;
-    }
-}
-
-class row {
-    constructor(minifield, rowIndex) {
-        this.minefield = minifield;
-        this.rowIndex = rowIndex;
-        this.squares = [];
-    }
-
-    isEven() {
-        return this.rowIndex % 2 === 0;
-    }
-
-    addSquare(square, squareIndexInMinefield) {
-        square.setRow(this, squareIndexInMinefield);
-        this.squares.push(square);
-    }
-}
+import row from './row';
+import square from './square';
 
 export default class minefield {
     constructor(levelName, level) {
@@ -47,6 +9,8 @@ export default class minefield {
         this.rows = [];
         this.squares = [];
         this.squaresWithBombs = [];
+        this.isFinished = false;
+        this.hasStarted = false;
     }
 
     static createMinefield(levelName) {
@@ -65,6 +29,26 @@ export default class minefield {
         mf._distributeBombs();
 
         return mf;
+    }
+
+    shouldPaintAsEven(square) {
+        const isEven = square.isEven();
+        const isNumberOfColumnsEven = this.level.columns % 2 === 0;
+
+        if (isNumberOfColumnsEven && !square.row.isEven()) {
+            return !isEven;
+        }
+
+        return isEven;
+    }
+
+    show(square) {
+        this.hasStarted = true;
+        square.show();
+
+        if (square.hasBomb) {
+            this.isFinished = true;
+        }
     }
 
     _distributeBombs() {

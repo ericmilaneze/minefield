@@ -1,43 +1,77 @@
 import React, { useState, useEffect } from 'react';
 
-import minefield from './minefield';
+import minefield from './minefield-game/minefield';
 
 import './index.scss';
 
-const levelName = 'Medium';
-let game;
-//let game = minefield.createMinefield(levelName);
+const levelName = 'Hard';
+let minefieldGame;
 
 export default function Minefield() {
     const [level, setLevel] = useState({});
+    const [game, setGame] = useState({});
+    const [rows, setRows] = useState([]);
+    const [version, setVersion] = useState(0);
 
     useEffect(() => {
-        game = minefield.createMinefield(levelName);
-        setLevel(game.level);
+        minefieldGame = minefield.createMinefield(levelName);
+        setGame(minefieldGame);
+        setLevel(minefieldGame.level);
+        setRows(minefieldGame.rows);
     }, []);
 
-    const { rows, columns, bombs } = level;
+    function restart() {
+        minefieldGame = minefield.createMinefield(levelName);
+        setGame(minefieldGame);
+        setLevel(minefieldGame.level);
+        setRows(minefieldGame.rows);
+        setVersion(version + 1);
+    }
+
+    function squareClick(square) {
+        if (!minefieldGame.isFinished) {
+            minefieldGame.show(square);
+            setGame(minefieldGame);
+            setVersion(version + 1);
+        }
+    }
+
+    const { rows: rowsQty, columns, bombs } = level;
 
     return (
         <section className="campo-minado">
             <div className="config">
                 <div>Level: {levelName}</div>
-                <div>Rows: {rows}</div>
+                <div>Rows: {rowsQty}</div>
                 <div>Columns: {columns}</div>
                 <div>Bombs: {bombs}</div>
+
+                {game.hasStarted &&
+                    <button 
+                        className=""
+                        onClick={() => restart()}>
+                        Restart
+                    </button>
+                }
             </div>
             <div className="main">
-                {game && game.rows.map(row => (
+                {rows.map(row => (
                     <div 
                         key={row.rowIndex}
                         className="square-row"
                     >
                         {row.squares.map(square => (
                             <div 
-                                key={square.squareIndex}
-                                className={`square ${square.isEven() ? 'even' : 'odd'}`}
+                                key={square.address.squareIndexInMinefield}
+                                className={`
+                                    square 
+                                    ${minefieldGame.shouldPaintAsEven(square) ? 'even' : 'odd'}
+                                    ${square.showingResult ? 'showing' : 'not-showing'}
+                                `}
+                                onClick={() => squareClick(square)}
                             >
-                                {square.hasBomb ? 'b' : ''}
+                                {square.showingResult && !square.hasBomb && square.getNumberOfNeighborsWithBombs()}
+                                {square.showingResult && square.hasBomb && 'B'}
                             </div>
                         ))}
                     </div>

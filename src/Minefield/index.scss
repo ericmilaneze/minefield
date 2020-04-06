@@ -34,16 +34,28 @@ section.campo-minado {
                 cursor: pointer;
     
                 &.even {
-                    background-color: #009900;
+                    &.not-showing {
+                        background-color: #009900;
+                    }
     
+                    &.showing {
+                        background-color: rgb(184, 212, 240);
+                    }
+
                     &:hover {
                         background-color: #3399FF;
                     }
                 }
     
                 &.odd {
-                    background-color: #006600;
+                    &.not-showing {
+                        background-color: #006600;
+                    }
     
+                    &.showing {
+                        background-color: rgb(184, 212, 240);
+                    }
+
                     &:hover {
                         background-color: #3399FF;
                     }
