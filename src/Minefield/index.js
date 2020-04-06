@@ -4,7 +4,7 @@ import minefield from './minefield-game/minefield';
 
 import './index.scss';
 
-const levelName = 'Hard';
+const levelName = 'Medium';
 let minefieldGame;
 
 export default function Minefield() {
@@ -29,11 +29,15 @@ export default function Minefield() {
     }
 
     function squareClick(square) {
-        if (!minefieldGame.isFinished) {
-            minefieldGame.show(square);
-            setGame(minefieldGame);
-            setVersion(version + 1);
-        }
+        minefieldGame.show(square);
+        setGame(minefieldGame);
+        setVersion(version + 1);
+    }
+
+    function squareRightClick(evt, square) {
+        evt.preventDefault();
+        square.toggleFlag();
+        setVersion(version + 1);
     }
 
     const { rows: rowsQty, columns, bombs } = level;
@@ -69,9 +73,11 @@ export default function Minefield() {
                                     ${square.showingResult ? 'showing' : 'not-showing'}
                                 `}
                                 onClick={() => squareClick(square)}
+                                onContextMenu={evt => squareRightClick(evt, square)}
                             >
                                 {square.showingResult && !square.hasBomb && square.getNumberOfNeighborsWithBombs()}
                                 {square.showingResult && square.hasBomb && 'B'}
+                                {square.hasFlag && 'F'}
                             </div>
                         ))}
                     </div>

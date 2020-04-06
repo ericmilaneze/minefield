@@ -43,11 +43,13 @@ export default class minefield {
     }
 
     show(square) {
-        this.hasStarted = true;
-        square.show();
+        if (!this.isFinished && !square.hasFlag) {
+            this.hasStarted = true;
+            square.show();
 
-        if (square.hasBomb) {
-            this.isFinished = true;
+            if (square.hasBomb) {
+                this.isFinished = true;
+            }
         }
     }
 
@@ -85,5 +87,4 @@ export default class minefield {
 
         return s;
     }
-
 };

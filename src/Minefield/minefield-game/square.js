@@ -3,6 +3,7 @@ export default class square {
         this.row = row;
         this.hasBomb = false;
         this.showingResult = false;
+        this.hasFlag = false;
     }
 
     setRow(row, squareIndexInMinefield) {
@@ -56,11 +57,17 @@ export default class square {
     }
 
     show() {
-        this.showingResult = true;
+        if (!square.hasFlag) {
+            this.showingResult = true;
+        }
     }
 
     isEven() {
         return this.address.squareIndexInMinefield % 2 === 0;
+    }
+
+    toggleFlag() {
+        this.hasFlag = !this.hasFlag && !this.showingResult;
     }
 
     putBomb() {
