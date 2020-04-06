@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
-
-import minefield from './minefield-game/minefield';
-
-import './index.scss';
-
 import { FiFlag } from "react-icons/fi";
 import { FaBomb } from "react-icons/fa";
 
-const levelName = 'Easy';
+import minefield from './minefield-game/minefield';
+import levels from './minefield-game/levels';
+
+import './index.scss';
 
 export default function Minefield() {
     const [game, setGame] = useState({});
     const [version, setVersion] = useState(0);
+    const [levelName, setLevelName] = useState(levels[Object.keys(levels)[0]].name)
 
     useEffect(() => {
         const newGame = minefield.createMinefield(levelName);
         setGame(newGame);
-    }, []);
+    }, [levelName]);
 
     function restart() {
         const newGame = minefield.createMinefield(levelName);
@@ -37,6 +36,10 @@ export default function Minefield() {
         setVersion(version + 1);
     }
 
+    function changeLevel(levelName) {
+        setLevelName(levelName);
+    }
+
     const { rows: rowsQty, columns, bombs } = game.level || {};
 
     return (
@@ -49,11 +52,20 @@ export default function Minefield() {
 
                 {game.hasStarted &&
                     <button 
-                        className=""
+                        className="row"
                         onClick={() => restart()}>
                         Restart
                     </button>
                 }
+
+                <select 
+                    className="row"
+                    onChange={(evt) => changeLevel(evt.target.value)}
+                >
+                    {Object.keys(levels).map((level) => (
+                        <option value={level} key={level}>{levels[level].name}</option>
+                    ))}
+                </select>
             </div>
             <div className="main">
                 {game.rows && game.rows.map(row => (
