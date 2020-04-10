@@ -81,6 +81,7 @@ export default function Minefield() {
                                         square 
                                         ${game.shouldPaintAsEven(square) ? 'even' : 'odd'}
                                         ${square.showingResult ? 'showing' : 'not-showing'}
+                                        ${levelName}
                                     `}
                                     onClick={() => squareClick(square)}
                                     onContextMenu={evt => squareRightClick(evt, square)}

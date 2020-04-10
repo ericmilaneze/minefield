@@ -41,7 +41,7 @@ section.campo-minado {
 
         .main {
             background-color: rgb(166, 186, 206);
-            padding: 5px 0 5px 0;
+            padding: 3px 0 3px 0;
 
             .square-row {
                 display: flex;
@@ -65,6 +65,16 @@ section.campo-minado {
                     -khtml-user-select: none; /* Konqueror HTML */
                     -moz-user-select: none; /* Firefox */
                     -ms-user-select: none; /* Internet Explorer/Edge */
+
+                    &.easy {
+                        width: 45px;
+                        height: 45px;
+                    }
+
+                    &.medium {
+                        width: 27px;
+                        height: 27px;
+                    }
         
                     &.even {
                         &.not-showing {
