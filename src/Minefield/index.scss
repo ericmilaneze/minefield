@@ -5,6 +5,7 @@ section.campo-minado {
         display: flex;
         justify-content: center;
         flex-direction: column;
+        min-width: 210px;
 
         .config {
             display: flex;
@@ -39,8 +40,8 @@ section.campo-minado {
         }
 
         .main {
-            background-color: rgb(217, 229, 241);
-            padding: 0 0 5px 0;
+            background-color: rgb(166, 186, 206);
+            padding: 5px 0 5px 0;
 
             .square-row {
                 display: flex;
@@ -55,8 +56,8 @@ section.campo-minado {
                     margin: 0;
                     font-family: Arial, Helvetica, sans-serif;
                     font-size: 0.95rem;
-                    width: 24px;
-                    height: 24px;
+                    width: 21px;
+                    height: 21px;
                     text-align: center;
                     cursor: pointer;
                     user-select: none; /* supported by Chrome and Opera */
