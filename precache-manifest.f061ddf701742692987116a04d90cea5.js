@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "81c1411cdc0106cef6d264a45606b0fb",
+    "revision": "9ad35550add5a4fd886ae81d29df4e53",
     "url": "/minefield/index.html"
   },
   {
-    "revision": "1689720e14a0763703b6",
-    "url": "/minefield/static/css/main.a19c1d5e.chunk.css"
+    "revision": "a0e9836372464f0e54ae",
+    "url": "/minefield/static/css/main.ebd77750.chunk.css"
   },
   {
     "revision": "ffa98166effa762f4daf",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/minefield/static/js/2.03a6c961.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "1689720e14a0763703b6",
+    "revision": "a0e9836372464f0e54ae",
     "url": "/minefield/static/js/main.1ecb5332.chunk.js"
   },
   {

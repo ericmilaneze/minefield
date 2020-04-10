@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/minefield/static/css/main.a19c1d5e.chunk.css",
+    "main.css": "/minefield/static/css/main.ebd77750.chunk.css",
     "main.js": "/minefield/static/js/main.1ecb5332.chunk.js",
     "main.js.map": "/minefield/static/js/main.1ecb5332.chunk.js.map",
     "runtime-main.js": "/minefield/static/js/runtime-main.5409faa3.js",
@@ -8,15 +8,15 @@
     "static/js/2.03a6c961.chunk.js": "/minefield/static/js/2.03a6c961.chunk.js",
     "static/js/2.03a6c961.chunk.js.map": "/minefield/static/js/2.03a6c961.chunk.js.map",
     "index.html": "/minefield/index.html",
-    "precache-manifest.f5ff6a286b4a59f7b1919ef1a136c098.js": "/minefield/precache-manifest.f5ff6a286b4a59f7b1919ef1a136c098.js",
+    "precache-manifest.f061ddf701742692987116a04d90cea5.js": "/minefield/precache-manifest.f061ddf701742692987116a04d90cea5.js",
     "service-worker.js": "/minefield/service-worker.js",
-    "static/css/main.a19c1d5e.chunk.css.map": "/minefield/static/css/main.a19c1d5e.chunk.css.map",
+    "static/css/main.ebd77750.chunk.css.map": "/minefield/static/css/main.ebd77750.chunk.css.map",
     "static/js/2.03a6c961.chunk.js.LICENSE.txt": "/minefield/static/js/2.03a6c961.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5409faa3.js",
     "static/js/2.03a6c961.chunk.js",
-    "static/css/main.a19c1d5e.chunk.css",
+    "static/css/main.ebd77750.chunk.css",
     "static/js/main.1ecb5332.chunk.js"
   ]
 }
