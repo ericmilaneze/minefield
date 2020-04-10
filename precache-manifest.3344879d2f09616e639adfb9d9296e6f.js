@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "128a9e56eacfb943e17c99ce085f1424",
+    "revision": "74f9572f4836c1b7fc60aff37d8576c9",
     "url": "/minefield/index.html"
   },
   {
