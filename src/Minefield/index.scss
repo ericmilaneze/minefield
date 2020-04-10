@@ -1,79 +1,100 @@
 section.campo-minado {
     display: flex;
-    justify-content: center;
 
-    .config {
-        background-color: lemonchiffon;
-        border: 1px solid darkgray;
-        padding: 15px;
-        font-size: 0.9rem;
+    div.game {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
 
-        .row {
-            display: block;
-            margin-top: 10px;
-        }
-
-        .result {
-            font-size: 1.2rem;
-            color: #FF0000;
-            font-weight: bold;
-        }
-    }
-
-    .main {
-        background-color: blanchedalmond;
-        border: 1px solid darkgray;
-        padding: 10px;
-
-        .square-row {
+        .config {
             display: flex;
-            justify-content: center;
-            margin: 0;
-            padding: 0;
-    
-            .square {
+            flex-direction: row;
+            justify-content: space-between;
+            
+            background-color: rgb(176, 181, 185);
+            border-bottom: 1px solid #000000;
+            padding: 8px 0 8px 0;
+            font-size: 0.9rem;
+            
+            div.flag {
+                display: inline;
+
+                margin-right: 15px;
+                margin-left: 10px;
+            }
+
+            .restart {
+                margin-right: 10px;
+
+                &.win {
+                    font-weight: bolder;
+                    border: 2px solid #009900;
+                }
+
+                &.lose {
+                    font-weight: bolder;
+                    border: 2px solid #AA0000;
+                }
+            }
+        }
+
+        .main {
+            background-color: rgb(217, 229, 241);
+            padding: 0 0 5px 0;
+
+            .square-row {
                 display: flex;
                 justify-content: center;
-                align-items: center;
-                border: 0;
                 margin: 0;
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 0.8rem;
-                width: 18px;
-                height: 18px;
-                text-align: center;
-                cursor: pointer;
-    
-                &.even {
-                    &.not-showing {
-                        background-color: #009900;
+                
+                .square {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border: 0;
+                    margin: 0;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 0.95rem;
+                    width: 24px;
+                    height: 24px;
+                    text-align: center;
+                    cursor: pointer;
+                    user-select: none; /* supported by Chrome and Opera */
+                    -webkit-user-select: none; /* Safari */
+                    -khtml-user-select: none; /* Konqueror HTML */
+                    -moz-user-select: none; /* Firefox */
+                    -ms-user-select: none; /* Internet Explorer/Edge */
+        
+                    &.even {
+                        &.not-showing {
+                            background-color: #009900;
 
-                        &:hover {
-                            background-color: #3399FF;
+                            &:hover {
+                                background-color: #3399FF;
+                            }
+                        }
+        
+                        &.showing {
+                            background-color: rgb(184, 212, 240);
                         }
                     }
-    
-                    &.showing {
-                        background-color: rgb(184, 212, 240);
-                    }
-                }
-    
-                &.odd {
-                    &.not-showing {
-                        background-color: #006600;
+        
+                    &.odd {
+                        &.not-showing {
+                            background-color: #006600;
 
-                        &:hover {
-                            background-color: #3399FF;
+                            &:hover {
+                                background-color: #3399FF;
+                            }
                         }
-                    }
-    
-                    &.showing {
-                        background-color: rgb(131, 151, 172);
+        
+                        &.showing {
+                            background-color: rgb(131, 151, 172);
+                        }
                     }
                 }
             }
         }
     }
-
     
 }

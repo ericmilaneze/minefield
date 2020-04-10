@@ -7,8 +7,6 @@ import './App.scss';
 function App() {
   return (
     <section className="main-section">
-      <h1>Minefield</h1>
-
       <Minefield />
     </section>
   );

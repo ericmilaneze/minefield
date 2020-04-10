@@ -42,67 +42,57 @@ export default function Minefield() {
 
     return (
         <section className="campo-minado">
-            <div className="config">
-                {game.level &&
-                    <div className="row">
-                        <div>Level: {game.level.name}</div>
-                        <div>Rows: {game.level.rows}</div>
-                        <div>Columns: {game.level.columns}</div>
-                        <div>Bombs: {game.level.bombs}</div>
+            <div className="game">
+                <div className="config">
+                    <div>
+                        <div className="flag"><FiFlag /> {game.qtyFlagsMissing}</div>
+
+                        <select 
+                            onChange={(evt) => changeLevel(evt.target.value)}
+                        >
+                            {Object.keys(levels).map((level) => (
+                                <option value={level} key={level}>{levels[level].name}</option>
+                            ))}
+                        </select>
                     </div>
-                }
 
-                <div className="row">
-                    <div>Flags: {game.qtyFlagsMissing}</div>
-                    <div>Fields: {game.qtyFieldsToExplore}</div>
+                    {game.hasStarted &&
+                        <button 
+                            className={`
+                                restart
+                                ${game.win ? 'win' : ''}
+                                ${game.lose ? 'lose' : ''}`
+                            }
+                            onClick={() => restart()}>
+                            Restart
+                        </button>
+                    }
                 </div>
-
-                {game.hasStarted &&
-                    <button 
-                        className="row"
-                        onClick={() => restart()}>
-                        Restart
-                    </button>
-                }
-
-                <select 
-                    className="row"
-                    onChange={(evt) => changeLevel(evt.target.value)}
-                >
-                    {Object.keys(levels).map((level) => (
-                        <option value={level} key={level}>{levels[level].name}</option>
+                <div className="main">
+                    {game.rows && game.rows.map(row => (
+                        <div 
+                            key={row.rowIndex}
+                            className="square-row"
+                        >
+                            {row.squares.map(square => (
+                                <div 
+                                    key={square.address.squareIndexInMinefield}
+                                    className={`
+                                        square 
+                                        ${game.shouldPaintAsEven(square) ? 'even' : 'odd'}
+                                        ${square.showingResult ? 'showing' : 'not-showing'}
+                                    `}
+                                    onClick={() => squareClick(square)}
+                                    onContextMenu={evt => squareRightClick(evt, square)}
+                                >
+                                    {square.showingResult && !square.hasBomb && square.getNumberOfNeighborsWithBombs() !== 0 && square.getNumberOfNeighborsWithBombs()}
+                                    {square.showingResult && square.hasBomb && <FaBomb />}
+                                    {square.hasFlag && <FiFlag />}
+                                </div>
+                            ))}
+                        </div>
                     ))}
-                </select>
-
-                <div className="row result">
-                    {game.win && 'You win!'}
-                    {game.lose && 'You lose!'}
                 </div>
-            </div>
-            <div className="main">
-                {game.rows && game.rows.map(row => (
-                    <div 
-                        key={row.rowIndex}
-                        className="square-row"
-                    >
-                        {row.squares.map(square => (
-                            <div 
-                                key={square.address.squareIndexInMinefield}
-                                className={`
-                                    square 
-                                    ${game.shouldPaintAsEven(square) ? 'even' : 'odd'}
-                                    ${square.showingResult ? 'showing' : 'not-showing'}
-                                `}
-                                onClick={() => squareClick(square)}
-                                onContextMenu={evt => squareRightClick(evt, square)}
-                            >
-                                {square.showingResult && !square.hasBomb && square.getNumberOfNeighborsWithBombs() !== 0 && square.getNumberOfNeighborsWithBombs()}
-                                {square.showingResult && square.hasBomb && <FaBomb />}
-                                {square.hasFlag && <FiFlag />}
-                            </div>
-                        ))}
-                    </div>
-                ))}
             </div>
         </section>
     );

@@ -1,6 +1,11 @@
 section.main-section {
-    h1 {
-        display: flex;
-        justify-content: center;
-    }
+    //height: 800px;;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    background-color: rgb(217, 229, 241);
+    flex-direction: column;
+
+    
 }
