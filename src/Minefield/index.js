@@ -10,9 +10,10 @@ import './index.scss';
 export default function Minefield() {
     const [game, setGame] = useState({});
     const [version, setVersion] = useState(0);
-    const [levelName, setLevelName] = useState(levels[Object.keys(levels)[0]].name);
+    const [levelName, setLevelName] = useState(levels[0].name);
 
     useEffect(() => {
+        console.log('levelName', levelName);
         const newGame = minefield.createMinefield(levelName);
         setGame(newGame);
     }, [levelName]);
@@ -50,8 +51,8 @@ export default function Minefield() {
                         <select 
                             onChange={(evt) => changeLevel(evt.target.value)}
                         >
-                            {Object.keys(levels).map((level) => (
-                                <option value={level} key={level}>{levels[level].name}</option>
+                            {levels.map((level) => (
+                                <option value={level.name} key={level.name}>{level.name}</option>
                             ))}
                         </select>
                     </div>
@@ -81,7 +82,7 @@ export default function Minefield() {
                                         square 
                                         ${game.shouldPaintAsEven(square) ? 'even' : 'odd'}
                                         ${square.showingResult ? 'showing' : 'not-showing'}
-                                        ${levelName}
+                                        ${levelName && levelName.toLowerCase()}
                                     `}
                                     onClick={() => squareClick(square)}
                                     onContextMenu={evt => squareRightClick(evt, square)}

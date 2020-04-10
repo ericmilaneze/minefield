@@ -17,7 +17,7 @@ export default class minefield {
     }
 
     static createMinefield(levelName) {
-        const level = levels[levelName.toLowerCase()];
+        const level = levels.find(x => x.name === levelName);
 
         const mf = new minefield(level);
 
