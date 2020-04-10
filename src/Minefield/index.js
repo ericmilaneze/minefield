@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FiFlag } from "react-icons/fi";
-import { FaBomb } from "react-icons/fa";
+import { FaBomb, Fa } from "react-icons/fa";
+import { MdCached } from 'react-icons/md';
+
+import Modal from '../Modal';
 
 import minefield from '../minefield-game/minefield';
 import levels from '../minefield-game/levels';
@@ -13,7 +16,6 @@ export default function Minefield() {
     const [levelName, setLevelName] = useState(levels[0].name);
 
     useEffect(() => {
-        console.log('levelName', levelName);
         const newGame = minefield.createMinefield(levelName);
         setGame(newGame);
     }, [levelName]);
@@ -43,6 +45,31 @@ export default function Minefield() {
 
     return (
         <section className="campo-minado">
+            <Modal show={game.win}>
+                <div className="modal-endgame win">
+                    <p>You win!</p>
+                    <div className="refresh">
+                        <button
+                            onClick={restart}
+                        >
+                            <MdCached />
+                        </button>
+                    </div>
+                </div>
+            </Modal>
+            <Modal show={game.lose}>
+                <div className="modal-endgame lose">
+                    <p>You lose!</p>
+                    <div className="refresh">
+                        <button
+                            onClick={restart}
+                        >
+                            <MdCached />
+                        </button>
+                    </div>
+                </div>
+            </Modal>
+
             <div className="game">
                 <div className="config">
                     <div>
@@ -56,18 +83,6 @@ export default function Minefield() {
                             ))}
                         </select>
                     </div>
-
-                    {game.hasStarted &&
-                        <button 
-                            className={`
-                                restart
-                                ${game.win ? 'win' : ''}
-                                ${game.lose ? 'lose' : ''}`
-                            }
-                            onClick={() => restart()}>
-                            Restart
-                        </button>
-                    }
                 </div>
                 <div className="main">
                     {game.rows && game.rows.map(row => (

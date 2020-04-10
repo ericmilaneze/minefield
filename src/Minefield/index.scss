@@ -1,3 +1,33 @@
+.modal-endgame {
+    &.win {
+        color: #006600;
+    }
+
+    &.lose {
+        color: #660000;
+    }
+
+    p {
+        // text-align: center;
+        font-size: 1.5em;    
+        font-weight: bolder;
+    }
+
+    .refresh {
+        text-align: center;
+        display: block;
+        margin-top: 15px;
+        
+        button {
+            cursor: pointer;
+            font-size: 1.7em;
+            line-height: 50px;
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
 section.campo-minado {
     display: flex;
 
@@ -11,7 +41,6 @@ section.campo-minado {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            
             background-color: rgb(176, 181, 185);
             border-bottom: 1px solid #000000;
             padding: 8px 0 8px 0;
@@ -19,23 +48,8 @@ section.campo-minado {
             
             div.flag {
                 display: inline;
-
                 margin-right: 15px;
                 margin-left: 10px;
-            }
-
-            .restart {
-                margin-right: 10px;
-
-                &.win {
-                    font-weight: bolder;
-                    border: 2px solid #009900;
-                }
-
-                &.lose {
-                    font-weight: bolder;
-                    border: 2px solid #AA0000;
-                }
             }
         }
 
