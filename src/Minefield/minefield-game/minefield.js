@@ -29,8 +29,6 @@ export default class minefield {
             }
         }
 
-        mf._distributeBombs();
-
         return mf;
     }
 
@@ -55,7 +53,11 @@ export default class minefield {
 
     show(square) {
         if (!this.isFinished && !square.hasFlag && !square.showingResult) {
-            this.hasStarted = true;
+            if (!this.hasStarted) {
+                this._distributeBombs(square);
+                this.hasStarted = true;
+            }
+
             square.show();
 
             if (square.hasBomb) {
@@ -88,22 +90,44 @@ export default class minefield {
         }
     }
 
-    _distributeBombs() {
+    _distributeBombs(chosenSquare) {
         let currNumberOfBombs = 0;
 
         while (currNumberOfBombs < this.level.bombs) {
             const randomNumber = Math.floor(Math.random() * this.squares.length);
-
-            const square = this.squares[randomNumber];
-
-            if (!square.hasBomb) {
-                square.putBomb();
-                this.squaresWithBombs.push(square);
-
+            const candidateSquare = this.squares[randomNumber];
+            
+            if (this.level.bisque && this._isNeighborOrSelf(candidateSquare, chosenSquare)) {
+                continue;
+            }
+            
+            if (!candidateSquare.hasBomb) {
+                candidateSquare.putBomb();
+                this.squaresWithBombs.push(candidateSquare);
                 currNumberOfBombs++;
                 this.qtyFieldsToExplore--;
             }
         }
+    }
+
+    _isNeighborOrSelf(currentSquare, chosenSquare) {
+        if (!chosenSquare) {
+            return false;
+        }
+
+        if (currentSquare === chosenSquare) {
+            return true;
+        }
+
+        const neighbors = chosenSquare.getNeighbors();
+
+        for (let i = 0; i < neighbors.length; i++) {
+            if (currentSquare === neighbors[i]) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     _createRow(rowIndex) {
