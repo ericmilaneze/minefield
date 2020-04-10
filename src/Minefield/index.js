@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FiFlag } from "react-icons/fi";
 import { FaBomb } from "react-icons/fa";
 
-import minefield from './minefield-game/minefield';
-import levels from './minefield-game/levels';
+import minefield from '../minefield-game/minefield';
+import levels from '../minefield-game/levels';
 
 import './index.scss';
 
