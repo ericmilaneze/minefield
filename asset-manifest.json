@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/minefield/static/css/main.eb14ab55.chunk.css",
-    "main.js": "/minefield/static/js/main.6159c586.chunk.js",
-    "main.js.map": "/minefield/static/js/main.6159c586.chunk.js.map",
+    "main.css": "/minefield/static/css/main.da325a76.chunk.css",
+    "main.js": "/minefield/static/js/main.e29993d5.chunk.js",
+    "main.js.map": "/minefield/static/js/main.e29993d5.chunk.js.map",
     "runtime-main.js": "/minefield/static/js/runtime-main.5409faa3.js",
     "runtime-main.js.map": "/minefield/static/js/runtime-main.5409faa3.js.map",
-    "static/js/2.ac961f9d.chunk.js": "/minefield/static/js/2.ac961f9d.chunk.js",
-    "static/js/2.ac961f9d.chunk.js.map": "/minefield/static/js/2.ac961f9d.chunk.js.map",
+    "static/js/2.aafe3e7f.chunk.js": "/minefield/static/js/2.aafe3e7f.chunk.js",
+    "static/js/2.aafe3e7f.chunk.js.map": "/minefield/static/js/2.aafe3e7f.chunk.js.map",
     "index.html": "/minefield/index.html",
-    "precache-manifest.c533634da5b7923bfd34d6a15cd87ed7.js": "/minefield/precache-manifest.c533634da5b7923bfd34d6a15cd87ed7.js",
+    "precache-manifest.c506bb6ef8176d70faae59219d1a1199.js": "/minefield/precache-manifest.c506bb6ef8176d70faae59219d1a1199.js",
     "service-worker.js": "/minefield/service-worker.js",
-    "static/css/main.eb14ab55.chunk.css.map": "/minefield/static/css/main.eb14ab55.chunk.css.map",
-    "static/js/2.ac961f9d.chunk.js.LICENSE.txt": "/minefield/static/js/2.ac961f9d.chunk.js.LICENSE.txt"
+    "static/css/main.da325a76.chunk.css.map": "/minefield/static/css/main.da325a76.chunk.css.map",
+    "static/js/2.aafe3e7f.chunk.js.LICENSE.txt": "/minefield/static/js/2.aafe3e7f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5409faa3.js",
-    "static/js/2.ac961f9d.chunk.js",
-    "static/css/main.eb14ab55.chunk.css",
-    "static/js/main.6159c586.chunk.js"
+    "static/js/2.aafe3e7f.chunk.js",
+    "static/css/main.da325a76.chunk.css",
+    "static/js/main.e29993d5.chunk.js"
   ]
 }
