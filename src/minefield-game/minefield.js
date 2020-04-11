@@ -3,23 +3,25 @@ import row from './row';
 import square from './square';
 
 export default class minefield {
-    constructor(level) {
+    constructor(level, getLastRecord, storeRecord) {
         this.level = level;
         this.rows = [];
         this.squares = [];
         this.squaresWithBombs = [];
+        this.hasStarted = false;
         this.isFinished = false;
         this.lose = false;
         this.win = false;
-        this.hasStarted = false;
         this.qtyFlagsMissing = level.bombs;
         this.qtyFieldsToExplore = 0;
+        this.getLastRecord = getLastRecord;
+        this.storeRecord = storeRecord;
     }
 
-    static createMinefield(levelName) {
+    static createMinefield(levelName, getLastRecord, storeRecord) {
         const level = levels.find(x => x.name === levelName);
 
-        const mf = new minefield(level);
+        const mf = new minefield(level, getLastRecord, storeRecord);
 
         for (let i = 0; i < mf.level.rows; i++) {
             const row = mf._createRow(i);
@@ -51,8 +53,20 @@ export default class minefield {
         });
     }
 
+    saveRecord() {
+        if (this.getLastRecord && this.storeRecord) {
+            const lastRecord = this.getLastRecord();
+            const elapsedSeconds = this.getElapsedSeconds();
+
+            if (!lastRecord || elapsedSeconds < lastRecord) {
+                this.storeRecord(elapsedSeconds);
+            }
+        }
+    }
+
     winGame() {
         this.finishGame();
+        this.saveRecord();
         this.win = true;
     }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiFlag } from "react-icons/fi";
-import { FaBomb } from "react-icons/fa";
+import { FaBomb, FaTrophy } from "react-icons/fa";
 import { MdCached } from 'react-icons/md';
 
 import Modal from '../Modal';
@@ -17,7 +17,7 @@ export default function Minefield() {
     const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
     useEffect(() => {
-        const newGame = minefield.createMinefield(levelName);
+        const newGame = minefield.createMinefield(levelName, getRecord, storeRecord);
         
         setGame(newGame);
     }, [levelName]);
@@ -32,8 +32,16 @@ export default function Minefield() {
         return () => clearInterval(interval);
     }, [game]);
 
+    function storeRecord(record) {
+        localStorage.setItem('record', record);
+    }
+
+    function getRecord() {
+        return localStorage.getItem('record');
+    }
+
     function restart() {
-        const newGame = minefield.createMinefield(levelName);
+        const newGame = minefield.createMinefield(levelName, getRecord, storeRecord);
         setGame(newGame);
         setVersion(version + 1);
     }
@@ -60,7 +68,24 @@ export default function Minefield() {
             <Modal show={game.win}>
                 <div className="modal-endgame win">
                     <p>You win!</p>
-                    <div className="refresh">
+                    <div className="row">
+                        <div className="record">
+                            <div className="trophies">
+                                <div className="trophy"><FaTrophy /></div>
+                                <div className="trophy"><FaTrophy /></div>
+                                <div className="trophy"><FaTrophy /></div>
+                                <div className="trophy"><FaTrophy /></div>
+                            </div>
+                            <div className="seconds">{getRecord()} seconds</div>
+                            <div className="trophies">
+                                <div className="trophy"><FaTrophy /></div>
+                                <div className="trophy"><FaTrophy /></div>
+                                <div className="trophy"><FaTrophy /></div>
+                                <div className="trophy"><FaTrophy /></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
                         <button
                             onClick={restart}
                         >
@@ -72,7 +97,7 @@ export default function Minefield() {
             <Modal show={game.lose}>
                 <div className="modal-endgame lose">
                     <p>You lose!</p>
-                    <div className="refresh">
+                    <div className="row">
                         <button
                             onClick={restart}
                         >
