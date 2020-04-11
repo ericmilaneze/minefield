@@ -8,7 +8,6 @@
     }
 
     p {
-        // text-align: center;
         font-size: 1.5em;    
         font-weight: bolder;
     }
@@ -79,6 +78,7 @@ section.campo-minado {
                     -khtml-user-select: none; /* Konqueror HTML */
                     -moz-user-select: none; /* Firefox */
                     -ms-user-select: none; /* Internet Explorer/Edge */
+                    transition: background-color .2s linear;
 
                     &.easy {
                         width: 45px;

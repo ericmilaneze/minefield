@@ -13,7 +13,12 @@ export default function Modal({ show, children }) {
                         ${show ? 'showing' : ''}
                     `}
                 >
-                    <div className="modal-content">
+                    <div 
+                        className={`
+                            modal-content
+                            ${show ? 'showing' : ''}
+                        `}
+                    >
                         {children}
                     </div>
                 </div>,

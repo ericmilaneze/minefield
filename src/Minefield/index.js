@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FiFlag } from "react-icons/fi";
-import { FaBomb, Fa } from "react-icons/fa";
+import { FaBomb } from "react-icons/fa";
 import { MdCached } from 'react-icons/md';
 
 import Modal from '../Modal';
