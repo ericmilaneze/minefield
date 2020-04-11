@@ -51,24 +51,54 @@ export default class minefield {
         });
     }
 
+    winGame() {
+        this.finishGame();
+        this.win = true;
+    }
+
+    loseGame() {
+        this.finishGame();
+        this.lose = true;
+    }
+
+    finishGame() {
+        this.isFinished = true;
+        this.finishTime = new Date();
+    }
+
+    startGame() {
+        this.hasStarted = true;
+        this.startTime = new Date();
+    }
+
+    getElapsedSeconds() {
+        if (!this.hasStarted) {
+            return 0;
+        }
+
+        if (this.isFinished) {
+            return Math.floor((this.finishTime - this.startTime) / 1000);
+        }
+
+        return Math.floor((new Date() - this.startTime) / 1000);
+    }
+
     show(square) {
         if (!this.isFinished && !square.hasFlag && !square.showingResult) {
             if (!this.hasStarted) {
                 this._distributeBombs(square);
-                this.hasStarted = true;
+                this.startGame();
             }
 
             square.show();
 
             if (square.hasBomb) {
-                this.isFinished = true;
-                this.lose = true;
+                this.loseGame();
             } else {
                 this.qtyFieldsToExplore--;
 
                 if (this.qtyFieldsToExplore === 0) {
-                    this.isFinished = true;
-                    this.win = true;
+                    this.winGame();
                 }
             }
 

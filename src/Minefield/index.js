@@ -14,11 +14,23 @@ export default function Minefield() {
     const [game, setGame] = useState({});
     const [version, setVersion] = useState(0);
     const [levelName, setLevelName] = useState(levels[0].name);
+    const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
     useEffect(() => {
         const newGame = minefield.createMinefield(levelName);
+        
         setGame(newGame);
     }, [levelName]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (game) {
+                setElapsedSeconds(game.getElapsedSeconds());
+            }
+        }, 100);
+
+        return () => clearInterval(interval);
+    }, [game]);
 
     function restart() {
         const newGame = minefield.createMinefield(levelName);
@@ -82,6 +94,10 @@ export default function Minefield() {
                                 <option value={level.name} key={level.name}>{level.name}</option>
                             ))}
                         </select>
+                    </div>
+
+                    <div>
+                        <div className="elapsedSeconds">{elapsedSeconds > 0 && elapsedSeconds}</div>
                     </div>
                 </div>
                 <div className="main">
